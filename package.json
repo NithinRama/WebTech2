@@ -1,0 +1,27 @@
+{
+  "name": "webtech2",
+  "version": "1.0.0",
+  "description": "web tech class project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhivijay96/WebTech2.git"
+  },
+  "keywords": [
+    "wt2",
+    "codepen"
+  ],
+  "author": "Abhishek, Nithin, Om",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhivijay96/WebTech2/issues"
+  },
+  "homepage": "https://github.com/abhivijay96/WebTech2#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
