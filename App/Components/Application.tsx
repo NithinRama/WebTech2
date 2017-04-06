@@ -11,7 +11,7 @@ class Application extends React.Component<undefined, undefined>
         console.log("inside render");
         return (
             <MuiThemeProvider>
-                <div> Hello World </div>
+                <HomePage/>
             </MuiThemeProvider>
         );
     }
