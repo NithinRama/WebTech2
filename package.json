@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/abhivijay96/WebTech2#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25"
   },
   "devDependencies": {
     "@types/material-ui": "^0.16.60",
