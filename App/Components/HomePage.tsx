@@ -1,14 +1,12 @@
 import * as React from 'react';
-import AppBar from 'material-ui/AppBar';
+import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 class HomePage extends React.Component<undefined, undefined>
-{   
+{
     render()
     {
         return (
-            <AppBar title = "CodeGram"/>
+            <Card/>
         );
     }
 }
-
-export default HomePage;

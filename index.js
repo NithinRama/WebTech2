@@ -11,4 +11,4 @@ app.get("/", function(req, res){
 
 app.listen(3000, function(){
     console.log("node app is running on 3000");
-})
+});
