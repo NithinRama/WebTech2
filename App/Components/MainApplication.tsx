@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 import HomePage from './HomePage'
+import CodePage from './CodePage'
 
 class MainApplication extends React.Component<undefined, MainApplicationState>
 {   
@@ -20,7 +21,7 @@ class MainApplication extends React.Component<undefined, MainApplicationState>
 
         return (
             <div>
-                <AppBar title = "CodeGram" iconElementRight = {appButton} zDepth = {this.state.isLoggedIn ? 0 : 2}/>
+                <AppBar title = "CodeGram" iconElementRight = {appButton} zDepth = {this.state.isLoggedIn ? 0 : 1}/>
                 {this.state.isLoggedIn ? <CodePage/> : <HomePage/>}
             </div>
         );
