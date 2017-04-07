@@ -2,6 +2,7 @@ import * as React from 'react';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
+import HomePage from './HomePage'
 
 class MainApplication extends React.Component<undefined, undefined>
 {   
@@ -12,6 +13,7 @@ class MainApplication extends React.Component<undefined, undefined>
         return (
             <div>
                 <AppBar title = "CodeGram" iconElementRight = {appButton}/>
+                <HomePage/>
             </div>
         );
     }
