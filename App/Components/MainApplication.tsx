@@ -27,9 +27,26 @@ class MainApplication extends React.Component<undefined, MainApplicationState>
         );
     }
 
+    componentDidMount()
+    {
+        let xhr = new XMLHttpRequest();;
+        xhr.open("GET", "http://localhost:3000/api/sess");
+        let element = this;
+        xhr.onreadystatechange = function()
+        {
+            if(xhr.readyState == 4 && xhr.status == 200)
+            {
+                let response = JSON.parse(xhr.responseText);
+                if(response["session"])
+                   element.setState({isLoggedIn: true}); 
+            }
+        }
+        xhr.send();
+    }
+
     signIn()
     {
-        this.setState({isLoggedIn: true});
+        window.location.replace("http://localhost:3000/api/auth/fb");
     }
 
     signOut()

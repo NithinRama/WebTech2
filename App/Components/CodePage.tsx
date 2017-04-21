@@ -1,5 +1,7 @@
-import * as React from 'react';
+import * as React from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
+import Editor from './Editor'
+import Posts from './Posts'
 
 class CodePage extends React.Component<undefined, undefined>
 {
@@ -8,14 +10,15 @@ class CodePage extends React.Component<undefined, undefined>
         return(
             <Tabs>
                 <Tab label = "CODE">
-                    <div> Here you code </div>
+                    <Editor/>
                 </Tab>
                 <Tab label = "FEED">
-                    <div> Here you see posts </div>
+                    <Posts/>
                 </Tab>
             </Tabs>
         )
     }
+
 }
 
 export default CodePage;

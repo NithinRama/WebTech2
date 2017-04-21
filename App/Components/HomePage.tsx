@@ -6,14 +6,15 @@ import FontIcon from 'material-ui/FontIcon'
 const cardStyle = {
     margin: 30
 }
-const buttonStyle = {
-    margin: "10px",
-    width: "100%"
-}
+
 const cardTextStyle = {
     borderLeft: "2px solid #4caf50",
     margin: "10px",
     backgroundColor: "#eeeeee"
+}
+
+const buttonStyle = {
+    margin: "5px"
 }
 
 class HomePage extends React.Component<undefined, undefined>
@@ -23,7 +24,7 @@ class HomePage extends React.Component<undefined, undefined>
         return (
             <Card style = {cardStyle}>
                 <CardMedia overlay = {<CardTitle title = "Code HTML, CSS and JS" subtitle = "Share your front end skills"/>}>
-                    <img src = "./images/logo.png" height = "500px"/>
+                    <img src = "./images/logo.jpg" height = "500px"/>
                 </CardMedia>
                 <CardTitle title = "Create Snippets"/>
                 <CardText style = {cardTextStyle}>
@@ -33,7 +34,7 @@ class HomePage extends React.Component<undefined, undefined>
                 <CardText style = {cardTextStyle}>
                     See live feed which will have new renders and like and comment and see it's explanation to learn more.
                 </CardText>
-                <RaisedButton label = "Start with facebook" icon = {<FontIcon className = "fa fa-facebook"/>} secondary = {true} style = {buttonStyle}/>
+                <RaisedButton label = "Start with facebook" icon = {<FontIcon className = "fa fa-facebook"/>} secondary = {true} fullWidth = {true} style = {buttonStyle}/>
             </Card>
         );
     }
