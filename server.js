@@ -125,6 +125,7 @@ app.get('/api/fb/friendsposts', function(req, res)
 			User.find({'facebook.profileId':friends.friends.data[i].id}, function(err,data){
 					if(err){console.log(error);
 						data[i]="error";}
+
 					else
 					{
 						console.log(data.length);
@@ -132,15 +133,15 @@ app.get('/api/fb/friendsposts', function(req, res)
 						{
 							console.log(data);
 							response = {
-							name: data[i].facebook.name,
-							posts: data[i].posts
+							name: data[0].facebook.displayName,
+							posts: data[0].posts
 							}
 							console.log(response);
 							data_friends[i] = response;
 						}
 						else
 						{
-							data_friends[i] = "{eeror}";
+							//data_friends[i] = "{eeror}";
 						}
 						console.log(data_friends); 
 					}
@@ -150,7 +151,6 @@ app.get('/api/fb/friendsposts', function(req, res)
 			});
 		}
 		append(0);
-		//console.log(data_friends);
 	});
 	
 
@@ -179,7 +179,7 @@ app.get('/login/failure', function(req, res){
 
 app.post('api/updateposts',function(req,res){
 	id = req.body.id;
-	User.find({'facebook.profileId': "1401281509936037"},function(err,doc){
+	User.find({'facebook.profileId': req.user.id},function(err,doc){
 		if(err){res.send(JSON.stringify('{error in facebook id}'));}
 		else
 		{
@@ -196,11 +196,12 @@ app.post('api/updateposts',function(req,res){
 })
 
 app.get('/api/getprofile', function(req,res){
-	Users.find({'facebook.profileId':req.user.id},function(err,doc){
+	User.find({'facebook.profileId':req.user.id},function(err,doc){
 		if(err) {res.send("{error infeetching data}");}
 		else
 		{
 			res.send(JSON.stringify(doc[0].facebook));
+			console.log("PROFILE IS" + JSON.stringify(doc[0].facebook));
 		}
 	});
 })
@@ -221,17 +222,18 @@ app.post('/api/postdata',function(req,res){
 		CSS:req.body.CSS,
 		JS:req.body.JS,
 	}
+
 	console.log(response);
 	c_posts = 0;
-	User.find({'facebook.profileId': "1401281509936037"},function(err,doc){
+	User.find({'facebook.profileId': req.user.id},function(err,doc){
 			this.c_posts = doc[0].facebook.number_posts;
 			console.log(c_posts);
-			User.update({'facebook.profileId': "1401281509936037"},{$push: {posts :{$each: [{ post_id: c_posts+1,html: req.body.HTML,css: req.body.CSS,js: req.body.JS}]}}},function(err,doc){
+			User.update({'facebook.profileId': req.user.id},{$push: {posts :{$each: [{ post_id: c_posts+1,html: req.body.HTML,css: req.body.CSS,js: req.body.JS}]}}},function(err,doc){
 			if(err){console.log(error);}
 			else
 			{   			
 				c_posts += 1;
-				User.updateOne({'facebook.profileId': "1401281509936037"},{$set: {"facebook.number_posts" : c_posts}},function(err,doc1)
+				User.updateOne({'facebook.profileId': req.user.id},{$set: {"facebook.number_posts" : c_posts}},function(err,doc1)
 					{
 						if (err) {console.log(err);}
 					});

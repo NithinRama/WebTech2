@@ -1,6 +1,7 @@
 import * as React from 'react'
 import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton'
+import Snackbar from 'material-ui/Snackbar'
 import Avatar from 'material-ui/Avatar'
 
 declare var ace: any;
@@ -33,14 +34,28 @@ const buttonStyle = {
     marginLeft: "4%"
 }
 
-class Editor extends React.Component<undefined, undefined>
+const profileStyle = {
+    fontFamily: "Roboto",
+    marginLeft: "20px"
+}
+
+class Editor extends React.Component<undefined, EditorState>
 {
+    constructor()
+    {
+        super();
+        this.state = {posted: false};
+        this.sendPost = this.sendPost.bind(this);
+    }
     render()
     {
         return (
             <div>
-                <div>
-                    <p id = "gathering profile info..."/>
+                <div style = {profileStyle}>
+                       <h2> Welcome </h2> 
+                    <p>
+                     <span id = "profile">Gathering Profile info</span>
+                    </p>
                 </div>
                  <h1 style = {headingStyle}>HTML <span><FontIcon className = "fa fa-html5"/> </span></h1>
                     <h1 style = {headingStyle}>CSS <span><FontIcon className = "fa fa-css3"/></span></h1>
@@ -52,6 +67,7 @@ class Editor extends React.Component<undefined, undefined>
                     <h1 style = {headingStyle}>Result</h1>
                     <iframe id = "result" style = {resultStyle}></iframe>
                     <RaisedButton label = "Post" icon = {<FontIcon className = "fa fa-share-square"/>} secondary = {true} style = {buttonStyle} onTouchTap = {this.sendPost}/>
+                <Snackbar message = "Posted Succesfully" open = {this.state.posted} autoHideDuration = {2000}/>
             </div>
         )
     }
@@ -78,7 +94,8 @@ class Editor extends React.Component<undefined, undefined>
         {
             if(xhr.status == 200 && xhr.readyState == 4)
             {
-                console.log(xhr.responseText);
+                let profile = JSON.parse(xhr.responseText);
+                document.getElementById("profile").innerHTML = profile["displayName"];
             }
         }
         xhr.send();
@@ -103,8 +120,31 @@ class Editor extends React.Component<undefined, undefined>
 
     sendPost()
     {
-        
+        var editor = ace.edit("html");
+        let html: string = editor.getValue();
+        editor = ace.edit("css");
+        let css: string = editor.getValue();
+        editor = ace.edit("js");
+        let js: string = editor.getValue();
+        let component = this;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3000/api/postdata");
+        xhr.onreadystatechange = function()
+        {
+            if(xhr.readyState == 4 && xhr.status == 200)
+            {
+                console.log("Succesfully posted");
+                component.setState({posted: true});
+            }
+        }
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("HTML=" + html.replace("\n", "") + "&CSS=" + css.replace("\n", "") + "&JS=" + js.replace("\n", "") + "");
     }
+}
+
+interface EditorState
+{
+    posted: boolean;
 }
 
 export default Editor

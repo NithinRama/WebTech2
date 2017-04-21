@@ -34,9 +34,14 @@ class HomePage extends React.Component<undefined, undefined>
                 <CardText style = {cardTextStyle}>
                     See live feed which will have new renders and like and comment and see it's explanation to learn more.
                 </CardText>
-                <RaisedButton label = "Start with facebook" icon = {<FontIcon className = "fa fa-facebook"/>} secondary = {true} fullWidth = {true} style = {buttonStyle}/>
+                <RaisedButton label = "Start with facebook" icon = {<FontIcon className = "fa fa-facebook"/>} secondary = {true} fullWidth = {true} style = {buttonStyle} onTouchTap = {this.login}/>
             </Card>
         );
+    }
+
+    login()
+    {
+        window.location.replace("http://localhost:3000/api/auth/fb");
     }
 }
 
